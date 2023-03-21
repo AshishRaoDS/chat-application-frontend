@@ -1,0 +1,57 @@
+.messagingAreaWrapper {
+    height: 100vh;
+}
+
+.header {
+    height: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+
+.body {
+    height: 86%;
+    display: flex;
+}
+
+.sideBar {
+    flex-basis: 15%;
+    background-color: gray;
+}
+
+.messageDisplayWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.messageDisplay {
+    height: 100%;
+}
+
+.inputContainer {
+    width: 100%;
+    display: flex;
+}
+
+.input {
+    flex-basis: 88%;
+    min-height: 50px;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 6px;
+    border: 0.5px solid grey;
+    outline: none;
+}
+
+.submitCta {
+    flex: 1;
+    cursor: pointer;
+    border: none;
+    background-color: blueviolet;
+    font-size: 18px;
+    color: white;
+    font-weight: 600;
+}
