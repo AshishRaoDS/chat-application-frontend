@@ -16,13 +16,20 @@ const MessagingArea: React.FC<Props> = ({
   nameState
 }) => {
   const [messageState, setMessageState] = useState("");
+  const [allUsers, setAllUsers] = useState<String[] | null>(null);
 
   const getAllUsers = () => {
     socket?.emit("allUsers");
     socket?.on("users", (data) => {
       console.log("All users", data);
+      setAllUsers(data);
     });
   };
+
+  socket?.on("users", (data) => {
+    console.log("All users", data);
+    setAllUsers(data);
+  });
 
   const messageChangeHandler = (e: any) => {
     setMessageState(e.target.value);
@@ -36,6 +43,7 @@ const MessagingArea: React.FC<Props> = ({
     if (nameState) {
       const newSocket = socketConnection(nameState);
 
+      newSocket.emit("userDetails", nameState);
       newSocket.on("message", (data) => {
         console.log("Messages", data);
       });
@@ -43,6 +51,7 @@ const MessagingArea: React.FC<Props> = ({
       setSocket(newSocket);
 
       return () => {
+        newSocket.emit("userDetails", nameState, true);
         newSocket.disconnect();
         setSocket(null);
       };
@@ -50,13 +59,26 @@ const MessagingArea: React.FC<Props> = ({
 
   }, [nameState]);
 
+  useEffect(() => {
+    if (socket) {
+      getAllUsers();
+    }
+  }, [socket]);
+
+
   return (
     <div className={styles.messagingAreaWrapper}>
       <header className={styles.header}>
         <h1>Place to unload your thoughts</h1>
       </header>
       <div className={styles.body}>
-        <div className={styles.sideBar}></div>
+        <div className={styles.sideBar}>
+          {
+            allUsers && allUsers.map((user, i) => (
+              <div className={styles.userWrapper} key={i}><p className={styles.userName}>{user}</p></div>
+            ))
+          }
+        </div>
         <div className={styles.messageDisplayWrapper}>
           <div className={styles.messageDisplay}></div>
           <div className={styles.inputContainer}>
