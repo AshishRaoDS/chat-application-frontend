@@ -25,6 +25,7 @@ const Home: React.FC<Props> = ({ }) => {
           setNameState={setNameState}
           nameState={nameState}
           setViewState={setViewState}
+          setSocket={setSocket}
         />
       }
       {
@@ -34,10 +35,9 @@ const Home: React.FC<Props> = ({ }) => {
           socket={socket}
           setNameState={setNameState}
           nameState={nameState}
+          setViewState={setViewState}
         />
       }
-
-
     </>
   );
 };
