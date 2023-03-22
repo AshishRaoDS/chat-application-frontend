@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0b1860;
+    background-color: rgb(68 22 122);
     padding: 0 60px;
 }
 
@@ -116,7 +116,7 @@
 
 .title {
     text-align: right;
-    color: #8bc34a;
+    color: white;
 }
 
 .description {
