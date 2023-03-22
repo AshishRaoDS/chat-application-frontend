@@ -40,6 +40,7 @@
     flex-direction: column;
     justify-content: flex-end;
     flex: 1;
+    overflow: hidden;
 }
 
 .messageDisplay {
@@ -129,9 +130,28 @@
 
 .messages {
     width: max-content;
-    padding: 4px 60px 4px 10px;
-    background-color: aquamarine;
+    padding: 10px 60px 10px 10px;
+    background-color: #bddfe4;
     border-radius: 8px;
+    border-bottom-left-radius: 0px;
+}
+
+.ownMessage {
+    margin-left: auto;
+    border-radius: 8px;
+    border-bottom-right-radius: 0px;
+}
+
+.sender {
+    color: blue;
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.date {
+    color: #5b5252;
+    font-size: 13px;
+    margin-left: 2px;
 }
 
 .messageWrapper {

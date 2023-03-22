@@ -56,6 +56,13 @@ const MessagingArea: React.FC<Props> = ({
     setViewState(ViewState.LANDING_PAGE);
   };
 
+  const handleKeyDown = (event: any) => {
+    if (event.key === 'Enter') {
+      // 👇 Get input value
+      submitMessage();
+    }
+  };
+
   useEffect(() => {
     if (!socket) {
       const newSocket = socketConnection(nameState, setSocket);
@@ -119,14 +126,17 @@ const MessagingArea: React.FC<Props> = ({
               {
                 allMessages.length > 0 && allMessages.map((text, i) => (
                   <div className={styles.messageWrapper} key={i}>
-                    <p className={styles.messages}>{text.message}</p>
+                    <div className={`${styles.messages} ${text.user === nameState ? styles.ownMessage : ""}`}>
+                      <p className={styles.sender}>{text.user} <span className={styles.date}>{text.date}</span></p>
+                      <p >{text.message}</p>
+                    </div>
                   </div>
                 ))
               }
             </div>
           </div>
           <div className={styles.inputContainer}>
-            <input className={styles.input} type="text" value={messageState} onChange={messageChangeHandler} />
+            <input className={styles.input} type="text" onKeyDown={handleKeyDown} value={messageState} onChange={messageChangeHandler} />
             <button type="button" className={styles.submitCta} onClick={submitMessage}>
               Submit Message
             </button>
