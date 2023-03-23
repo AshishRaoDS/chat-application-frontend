@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../app/page.module.css";
 import { ViewState } from "@/app/page";
+import 'animate.css';
 
 type Props = {
   setNameState: React.Dispatch<React.SetStateAction<string>>;
@@ -31,7 +32,9 @@ const LandingPage: React.FC<Props> = ({
   };
 
   const submitHandler = () => {
-    setViewState(ViewState.MESSAGING_PAGE);
+    if (nameState && roomState) {
+      setViewState(ViewState.MESSAGING_PAGE);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -43,13 +46,13 @@ const LandingPage: React.FC<Props> = ({
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.card}>
-        <h1 className={styles.title}>Snap Skoot</h1>
-        <p className={styles.subTitle}>Where anonymity is valued the most</p>
+        <h1 className={`${styles.title}  animate__animated animate__backInDown`}>Snap Skoot</h1>
+        <p className={`${styles.subTitle} animate__animated animate__flip`}>Where anonymity is valued the most</p>
         <div className={styles.inputContainer}>
           <div className={styles.inputWrapper}>
             <input
               type="text"
-              placeholder="Enter to secret name here"
+              placeholder="Enter your secret name here"
               value={nameState}
               required
               className={styles.input}

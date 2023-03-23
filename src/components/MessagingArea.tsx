@@ -44,8 +44,10 @@ const MessagingArea: React.FC<Props> = ({
   };
 
   const submitMessage = () => {
-    socket?.emit("message", messageState);
-    setMessageState("");
+    if (messageState) {
+      socket?.emit("message", messageState);
+      setMessageState("");
+    }
   };
 
   const exitMessagingAreaHandler = () => {
@@ -92,6 +94,19 @@ const MessagingArea: React.FC<Props> = ({
     }
   }, [socket?.connected]);
 
+  useEffect(() => {
+    function confirmExit(event: any) {
+      event.preventDefault();
+      event.returnValue = "";
+    }
+
+    window.addEventListener("beforeunload", confirmExit);
+
+    return () => {
+      window.removeEventListener("beforeunload", confirmExit);
+    };
+  }, []);
+
   return (
     <div className={styles.messagingAreaWrapper}>
       <header className={styles.header}>
@@ -111,7 +126,12 @@ const MessagingArea: React.FC<Props> = ({
           <div className={styles.usersContainer}>
             {
               (allUsers.length > 0) && allUsers.map((user, i) => (
-                <div className={styles.userWrapper} key={i}><p className={styles.userName}>{user.username}</p></div>
+                <div className={styles.userWrapper} key={i}>
+                  <p className={styles.userName}>
+                    {user.username}
+                    {user.username === nameState ? <span className={styles.youTag}>(You)</span> : ""}
+                  </p>
+                </div>
               ))
             }
           </div>

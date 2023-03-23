@@ -174,3 +174,9 @@
 .usersContainer::-webkit-scrollbar {
     display: none;
 }
+
+.youTag {
+    color: white;
+    font-size: 14px;
+    margin-left: 3px;
+}
