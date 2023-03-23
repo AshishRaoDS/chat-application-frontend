@@ -39,6 +39,7 @@ const Home: React.FC<Props> = ({ }) => {
           nameState={nameState}
           setViewState={setViewState}
           roomState={roomState}
+          setRoomState={setRoomState}
         />
       }
     </>

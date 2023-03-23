@@ -22,9 +22,8 @@ const LandingPage: React.FC<Props> = ({
   setRoomState,
   roomState
 }) => {
-
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, inputType: StateType) => {
-    if (inputType = StateType.NAME) {
+    if (inputType === StateType.NAME) {
       setNameState(e.target.value);
     } else {
       setRoomState(e.target.value);
@@ -33,6 +32,12 @@ const LandingPage: React.FC<Props> = ({
 
   const submitHandler = () => {
     setViewState(ViewState.MESSAGING_PAGE);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key === "Enter" && nameState && roomState) {
+      submitHandler();
+    }
   };
 
   return (
@@ -46,6 +51,7 @@ const LandingPage: React.FC<Props> = ({
               type="text"
               placeholder="Enter to secret name here"
               value={nameState}
+              required
               className={styles.input}
               onChange={(e) => inputChangeHandler(e, StateType.NAME)}
             />
@@ -56,6 +62,8 @@ const LandingPage: React.FC<Props> = ({
               placeholder="The room you want to enter"
               value={roomState}
               className={styles.input}
+              required
+              onKeyDown={handleKeyDown}
               onChange={(e) => inputChangeHandler(e, StateType.ROOM)}
             />
           </div>

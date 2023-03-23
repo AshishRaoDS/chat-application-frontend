@@ -7,11 +7,7 @@ type SocketDetails = {
 };
 
 export const socketConnection = (username: string, room: string, setSocket: React.Dispatch<React.SetStateAction<Socket | null>>) => {
-    const newSocket = io("http://localhost:3000", {
-        query: {
-            username
-        }
-    });
+    const newSocket = io("http://localhost:3000");
     newSocket.connect();
     newSocket.on("connect", () => {
         setSocket(newSocket);

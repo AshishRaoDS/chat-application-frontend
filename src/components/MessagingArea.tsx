@@ -11,6 +11,7 @@ type Props = {
   nameState: string;
   setViewState: React.Dispatch<React.SetStateAction<ViewState>>;
   roomState: string;
+  setRoomState: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type Message = {
@@ -31,7 +32,8 @@ const MessagingArea: React.FC<Props> = ({
   nameState,
   setViewState,
   setNameState,
-  roomState
+  roomState,
+  setRoomState
 }) => {
   const [messageState, setMessageState] = useState("");
   const [allUsers, setAllUsers] = useState<AllUsers[]>([]);
@@ -77,6 +79,7 @@ const MessagingArea: React.FC<Props> = ({
     return () => {
       socket?.disconnect();
       setNameState("");
+      setRoomState("");
       setSocket(null);
     };
   }, []);
