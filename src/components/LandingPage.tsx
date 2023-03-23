@@ -1,65 +1,72 @@
 import React, { useEffect, useState } from "react";
 import styles from "../app/page.module.css";
-import { io, Socket } from "socket.io-client";
 import { ViewState } from "@/app/page";
-import { socketConnection, socketReconnect } from "@/services/socket";
 
 type Props = {
   setNameState: React.Dispatch<React.SetStateAction<string>>;
   nameState: string;
   setViewState: React.Dispatch<React.SetStateAction<ViewState>>;
-  setSocket: React.Dispatch<React.SetStateAction<Socket | null>>;
+  setRoomState: React.Dispatch<React.SetStateAction<string>>;
+  roomState: string;
 };
+
+enum StateType {
+  NAME = "name",
+  ROOM = "room"
+}
 
 const LandingPage: React.FC<Props> = ({
   setNameState,
   nameState,
   setViewState,
-  setSocket
+  setRoomState,
+  roomState
 }) => {
 
-  const inputChangeHandler = (e: any) => {
-    setNameState(e.target.value);
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, inputType: StateType) => {
+    if (inputType = StateType.NAME) {
+      setNameState(e.target.value);
+    } else {
+      setRoomState(e.target.value);
+    }
   };
 
-  const submitNameHandler = (e: any) => {
+  const submitHandler = () => {
     setViewState(ViewState.MESSAGING_PAGE);
   };
-
-  useEffect(() => {
-    const socketInfo = localStorage.getItem('socket');
-
-    if (socketInfo) {
-      const parsedSocketDetails = JSON.parse(socketInfo);
-      const socketReconnection = socketReconnect(parsedSocketDetails);
-      if (socketReconnection.connected) {
-        setViewState(ViewState.MESSAGING_PAGE);
-        setSocket(socketReconnection);
-      }
-    }
-  }, []);
 
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.card}>
-        <h1 className={styles.title}>Welcome to your general chat site</h1>
+        <h1 className={styles.title}>Snap Skoot</h1>
         <p className={styles.subTitle}>Where anonymity is valued the most</p>
         <div className={styles.inputContainer}>
-          <input
-            type="text"
-            placeholder="Enter to secret name here"
-            value={nameState}
-            className={styles.input}
-            onChange={inputChangeHandler}
-          />
+          <div className={styles.inputWrapper}>
+            <input
+              type="text"
+              placeholder="Enter to secret name here"
+              value={nameState}
+              className={styles.input}
+              onChange={(e) => inputChangeHandler(e, StateType.NAME)}
+            />
+          </div>
+          <div className={styles.inputWrapper}>
+            <input
+              type="text"
+              placeholder="The room you want to enter"
+              value={roomState}
+              className={styles.input}
+              onChange={(e) => inputChangeHandler(e, StateType.ROOM)}
+            />
+          </div>
           <button
             type="button"
-            className={styles.submitNameCta}
-            onClick={submitNameHandler}
-          >Submit your name</button>
+            className={styles.enterChatCta}
+            onClick={submitHandler}
+          >Enter Chat Room</button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

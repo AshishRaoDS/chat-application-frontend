@@ -3,22 +3,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(45deg, #000046, #1CB5E0);
+  background-color: #2000621c;
 }
 
 .card {
   aspect-ratio: 1;
   max-width: 600px;
-  padding: 20px;
-  background: linear-gradient(45deg, #fc4a1a, #f7b733);
-  border: 15px solid #03a9f4;
-  border-radius: 8px;
+  padding: 54px;
+  background-color: #9c5fe4;
+  border-radius: 6px;
+  box-shadow: 5px 7px 8px grey;
 }
 
 .title {
   color: white;
   font-weight: 600;
-  margin-top: 50px;
+  text-align: center;
 }
 
 .inputContainer {
@@ -26,31 +26,37 @@
   flex-direction: column;
 }
 
+.inputWrapper {
+  margin-bottom: 10px;
+}
+
 .subTitle {
   margin-bottom: 30px;
   text-align: center;
   margin-top: 100px;
   font-size: 21px;
-  color: #2f4f2b;
+  color: #ffeb3b;
   font-weight: 600;
 }
 
 .input {
   height: 40px;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 22px 14px;
+  border-radius: 3px;
   outline: none;
   border: none;
   font-size: 18px;
+  width: 100%;
 }
 
-.submitNameCta {
+.enterChatCta {
   margin-top: 50px;
   height: 50px;
-  border-radius: 14px;
+  border-radius: 4px;
   border: none;
   cursor: pointer;
-  font-size: 17px;
+  font-size: 21px;
   font-weight: 600;
-  background-color: #6baebd;
+  background-color: #f8c630;
+  font-family: inherit;
 }

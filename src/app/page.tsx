@@ -15,6 +15,7 @@ export enum ViewState {
 const Home: React.FC<Props> = ({ }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [nameState, setNameState] = useState("");
+  const [roomState, setRoomState] = useState("");
   const [viewState, setViewState] = useState<ViewState>(ViewState.LANDING_PAGE);
 
   return (
@@ -25,7 +26,8 @@ const Home: React.FC<Props> = ({ }) => {
           setNameState={setNameState}
           nameState={nameState}
           setViewState={setViewState}
-          setSocket={setSocket}
+          setRoomState={setRoomState}
+          roomState={roomState}
         />
       }
       {
@@ -36,6 +38,7 @@ const Home: React.FC<Props> = ({ }) => {
           setNameState={setNameState}
           nameState={nameState}
           setViewState={setViewState}
+          roomState={roomState}
         />
       }
     </>

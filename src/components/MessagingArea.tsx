@@ -10,6 +10,7 @@ type Props = {
   setNameState: React.Dispatch<React.SetStateAction<string>>;
   nameState: string;
   setViewState: React.Dispatch<React.SetStateAction<ViewState>>;
+  roomState: string;
 };
 
 type Message = {
@@ -29,20 +30,14 @@ const MessagingArea: React.FC<Props> = ({
   socket,
   nameState,
   setViewState,
-  setNameState
+  setNameState,
+  roomState
 }) => {
   const [messageState, setMessageState] = useState("");
   const [allUsers, setAllUsers] = useState<AllUsers[]>([]);
   const [allMessages, setAllMessages] = useState<Message[]>([]);
 
-  const getAllUsers = () => {
-    // socket?.emit("allUsers");
-    // socket?.on("users", (data) => {
-    //   setAllUsers(data);
-    // });
-  };
-
-  const messageChangeHandler = (e: any) => {
+  const messageChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessageState(e.target.value);
   };
 
@@ -56,16 +51,15 @@ const MessagingArea: React.FC<Props> = ({
     setViewState(ViewState.LANDING_PAGE);
   };
 
-  const handleKeyDown = (event: any) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Enter') {
-      // 👇 Get input value
       submitMessage();
     }
   };
 
   useEffect(() => {
     if (!socket) {
-      const newSocket = socketConnection(nameState, setSocket);
+      const newSocket = socketConnection(nameState, roomState, setSocket);
       newSocket?.on("message", (data) => {
         setAllMessages((prevState) => {
           const messages = [...prevState];
@@ -79,7 +73,6 @@ const MessagingArea: React.FC<Props> = ({
         setAllUsers(data);
       });
     }
-
 
     return () => {
       socket?.disconnect();
