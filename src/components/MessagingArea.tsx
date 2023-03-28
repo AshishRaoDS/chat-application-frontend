@@ -76,6 +76,12 @@ const MessagingArea: React.FC<Props> = ({
       newSocket?.on("users", (data) => {
         setAllUsers(data);
       });
+
+      newSocket.on("connect_error", () => {
+        console.log("socket connection error");
+        setViewState(ViewState.LANDING_PAGE);
+        newSocket.disconnect();
+      });
     }
 
     return () => {
