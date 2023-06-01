@@ -9,6 +9,7 @@
     padding: 40px;
     border-radius: 20px;
     background-color: antiquewhite;
+    min-width: 400px;
 }
 
 .loginTitle {
@@ -43,4 +44,5 @@
     cursor: pointer;
     background-color: aqua;
     margin: 6px 0;
+    font-weight: 600;
 }
