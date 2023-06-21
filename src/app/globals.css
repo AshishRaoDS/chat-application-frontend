@@ -78,4 +78,8 @@ a {
   html {
     color-scheme: dark;
   }
+
+  body {
+    background: white;
+  }
 }

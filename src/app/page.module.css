@@ -47,6 +47,8 @@
   border: none;
   font-size: 18px;
   width: 100%;
+  background: white;
+  color: black;
 }
 
 .enterChatCta {
