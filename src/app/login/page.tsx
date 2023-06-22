@@ -27,7 +27,7 @@ const Login = () => {
                         <input type="email" required name="email" id="email" onChange={inputChangeHandler} placeholder="Enter your email" />
                         <label htmlFor="password">Password</label>
                         <input type="password" required name="password" id="password" placeholder="********" onChange={inputChangeHandler} />
-                        <button type="submit">Login</button>
+                        <button id="login" type="submit">Login</button>
                     </form>
                 </div>
             </main>

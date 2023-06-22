@@ -3,7 +3,7 @@ import LandingPage from "@/components/LandingPage";
 import MessagingArea from "@/components/MessagingArea";
 import React, { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import styles from './page.module.css';
+// import styles from './page.module.css';
 
 type Props = {};
 

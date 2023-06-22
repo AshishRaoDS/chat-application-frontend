@@ -45,9 +45,9 @@ const LandingPage: React.FC<Props> = ({
 
   return (
     <div className={styles.pageWrapper}>
-      <div className={styles.card}>
-        <h1 className={`${styles.title}  animate__animated animate__backInDown`}>Snap Skoot</h1>
-        <p className={`${styles.subTitle} animate__animated animate__flip`}>Where anonymity is valued the most</p>
+      <div className="aspect-square max-w-[600px p-[54px] bg-[#9c5fe4] rounded-md	shadow-[5px_7px_8px_rgba(128,128,128)]">
+        <h1 className={`text-white text-center font-semibold animate__animated animate__backInDown text-2xl`}>Snap Skoot</h1>
+        <p className={`mb-[30px] text-center mt-[100px] text-sub-title text-[21px] font-semibold animate__animated animate__flip`}>Where anonymity is valued the most</p>
         <div className={styles.inputContainer}>
           <div className={styles.inputWrapper}>
             <input

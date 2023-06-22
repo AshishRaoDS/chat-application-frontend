@@ -1,3 +1,8 @@
+@import 'tailwindcss/tailwind.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .mainSection {
     height: 80vh;
     display: flex;
@@ -42,7 +47,7 @@
     border: none;
     font-size: 15px;
     cursor: pointer;
-    background-color: aqua;
+    /* background-color: aqua; */
     margin: 6px 0;
     font-weight: 600;
 }

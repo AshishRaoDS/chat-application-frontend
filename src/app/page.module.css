@@ -6,20 +6,20 @@
   background-color: #2000621c;
 }
 
-.card {
+/* .card {
   aspect-ratio: 1;
   max-width: 600px;
   padding: 54px;
   background-color: #9c5fe4;
   border-radius: 6px;
-  box-shadow: 5px 7px 8px grey;
-}
+  box-shadow: 5px 7px 8px rgb(128, 128, 128);
+} */
 
-.title {
+/* .title {
   color: white;
   font-weight: 600;
   text-align: center;
-}
+} */
 
 .inputContainer {
   display: flex;
@@ -30,14 +30,14 @@
   margin-bottom: 10px;
 }
 
-.subTitle {
+/* .subTitle {
   margin-bottom: 30px;
   text-align: center;
   margin-top: 100px;
   font-size: 21px;
   color: #ffeb3b;
   font-weight: 600;
-}
+} */
 
 .input {
   height: 40px;
@@ -59,6 +59,6 @@
   cursor: pointer;
   font-size: 21px;
   font-weight: 600;
-  background-color: #f8c630;
+  background-color: #f8c630 !important;
   font-family: inherit;
 }

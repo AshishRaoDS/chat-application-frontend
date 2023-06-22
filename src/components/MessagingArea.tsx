@@ -3,6 +3,8 @@ import styles from "../styles/MessagingArea.module.css";
 import { Socket } from "socket.io-client";
 import { socketConnection } from "@/services/socket";
 import { ViewState } from "@/app/page";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
+import { Skeleton } from "../../components/ui/skeleton";
 
 type Props = {
   setSocket: React.Dispatch<React.SetStateAction<Socket | null>>;
@@ -122,17 +124,21 @@ const MessagingArea: React.FC<Props> = ({
           <button className={styles.exitCta} type="button" onClick={exitMessagingAreaHandler}>Exit Chat</button>
         </div>
       </header>
-      <div className={styles.body}>
-        <div className={styles.sideBar}>
+      <div className="flex h-[90%]">
+        <div className="basis-[15%] bg-[#20006245] py-[20px] px-[10px]">
           <div>
-            <h3 className={styles.sidebarLabel}><i className="fas fa-comments"></i> Room Name:</h3>
-            <h2 className={styles.roomTitle}>{allUsers.length > 0 && allUsers[0].room}</h2>
+            <h3 className="text-[#FFFF] mb-[6px]"><i className="fas fa-comments"></i> Room Name:</h3>
+            <h2 className="py-[8px] px-[26px] bg-[#967fb0] text-[#ffff52bf] rounded-[3px] mb-[12px]">{allUsers.length > 0 && allUsers[0].room}</h2>
           </div>
-          <h3 className={styles.sidebarLabel}><i className="fas fa-users"></i> Users: {allUsers.length}</h3>
+          <h3 className="text-[#FFF] mb-[6px]"><i className="fas fa-users"></i> Users: {allUsers.length}</h3>
           <div className={styles.usersContainer}>
             {
               (allUsers.length > 0) && allUsers.map((user, i) => (
-                <div className={styles.userWrapper} key={i}>
+                <div className={`${styles.userWrapper}`} key={i}>
+                  <Avatar className="h-full rounded-full overflow-hidden	ml-2">
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback><Skeleton className="h-full w-10 bg-slate-200"></Skeleton></AvatarFallback>
+                  </Avatar>
                   <p className={styles.userName}>
                     {user.username}
                     {user.username === nameState ? <span className={styles.youTag}>(You)</span> : ""}

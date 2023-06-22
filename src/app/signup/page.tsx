@@ -30,7 +30,7 @@ const Login = () => {
                         <input type="password" required name="password" id="password" placeholder="********" onChange={inputChangeHandler} />
                         <label htmlFor="confirmPassword">Confirm Password</label>
                         <input type="password" required name="confirmPassword" id="confirmPassword" placeholder="********" onChange={inputChangeHandler} />
-                        <button type="submit">Signup</button>
+                        <button className="bg-red-500" type="submit">Signup</button>
                     </form>
                 </div>
             </main>
