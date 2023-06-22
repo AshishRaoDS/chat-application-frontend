@@ -76,7 +76,12 @@ const MessagingArea: React.FC<Props> = ({
       });
 
       newSocket?.on("users", (data) => {
-        setAllUsers(data);
+        /* TODO: Find a better way to do this
+        This breaks when you have two users with the same name 
+        */
+        const otherUsers = data.filter((user: AllUsers) => user.username !== nameState);
+        otherUsers.unshift(...data.filter((user: AllUsers) => user.username === nameState));
+        setAllUsers(otherUsers);
       });
 
       newSocket.on("connect_error", () => {
@@ -135,6 +140,7 @@ const MessagingArea: React.FC<Props> = ({
             {
               (allUsers.length > 0) && allUsers.map((user, i) => (
                 <div className={`${styles.userWrapper}`} key={i}>
+                  {/* TODO: Add random images as profile icon from a set of images */}
                   <Avatar className="h-full rounded-full overflow-hidden	ml-2">
                     <AvatarImage src="https://github.com/shadcn.png" />
                     <AvatarFallback><Skeleton className="h-full w-10 bg-slate-200"></Skeleton></AvatarFallback>
