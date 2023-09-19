@@ -17,9 +17,9 @@ type Props = {
 };
 
 type Message = {
-  user: any;
+  sender: any;
   message: any;
-  date: string;
+  time: string;
 };
 
 type AllUsers = {
@@ -74,6 +74,15 @@ const MessagingArea: React.FC<Props> = ({
           return messages;
         });
       });
+
+      newSocket?.on("chatHistory", (data) => {
+        setAllMessages((prevState) => {
+          const messages = [...prevState];
+          messages.push(...data);
+
+          return messages;
+        }); 
+      })
 
       newSocket?.on("users", (data) => {
         /* TODO: Find a better way to do this
@@ -160,8 +169,8 @@ const MessagingArea: React.FC<Props> = ({
               {
                 allMessages.length > 0 && allMessages.map((text, i) => (
                   <div className={styles.messageWrapper} key={i}>
-                    <div className={`${styles.messages} ${text.user === nameState ? styles.ownMessage : ""}`}>
-                      <p className={styles.sender}>{text.user} <span className={styles.date}>{text.date}</span></p>
+                    <div className={`${styles.messages} ${text.sender === nameState ? styles.ownMessage : ""}`}>
+                      <p className={styles.sender}>{text.sender} <span className={styles.date}>{text.time}</span></p>
                       <p >{text.message}</p>
                     </div>
                   </div>
