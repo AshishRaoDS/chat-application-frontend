@@ -63,6 +63,15 @@ const MessagingArea: React.FC<Props> = ({
     }
   };
 
+  const deleteChatHistoryHandler = () => {
+    socket?.emit("deleteChatHistory")
+  }
+
+  socket?.on("deletedHistory", (data) => {
+    console.log('received data', data)
+    setAllMessages([data])
+  })
+
   useEffect(() => {
     if (!socket) {
       const newSocket = socketConnection(nameState, roomState, setSocket);
@@ -74,6 +83,11 @@ const MessagingArea: React.FC<Props> = ({
           return messages;
         });
       });
+
+      newSocket?.on("deletedHistory", (data) => {
+        console.log('received data', data)
+        setAllMessages(data)
+      })
 
       newSocket?.on("chatHistory", (data) => {
         setAllMessages((prevState) => {
@@ -177,6 +191,7 @@ const MessagingArea: React.FC<Props> = ({
                 ))
               }
             </div>
+            <button className={styles.deleteHistoryCta} onClick={deleteChatHistoryHandler}>Delete History</button>
           </div>
           <div className={styles.inputContainer}>
             <input className={styles.input} type="text" onKeyDown={handleKeyDown} value={messageState} onChange={messageChangeHandler} />

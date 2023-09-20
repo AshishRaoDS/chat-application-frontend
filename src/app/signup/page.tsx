@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import { useState } from "react";
 import styles from "../../styles/Login.module.css";
 
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGZhZHNmQGdtYWlsLmNvbSIsImlhdCI6MTY5NTIxOTcwOX0.ZeKc327AU-QKA0iM3kZ8VX16JU5_xd09tCfEajs8PYk"
+
 const Login = () => {
     const [userDetails, setUserDetails] = useState({
         email: '',
@@ -13,10 +15,39 @@ const Login = () => {
     function inputChangeHandler(e: any) {
         setUserDetails((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
     }
-    function loginHandler(e: any) {
+
+    async function loginHandler(e: any) {
         e.preventDefault();
+
+        if(userDetails.confirmPassword === userDetails.password) {
+           const signedInToken = await fetch('http://localhost:3000/v1/auth/signup', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: userDetails.email,
+                    password: userDetails.password
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                  }
+            })
+
+            console.log('user signed in', signedInToken)
+        }
         console.log("user detials", userDetails);
     }
+
+
+    // async function decodeToken(e) {
+    //     e.preventDefault();
+    //     const decodedValue = await fetch(`http://localhost:3000/v1/auth/decode/?token=${token}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+
+    //     console.log('decoded value', decodedValue)
+    // }
     return (
         <div>
             {/* <Header /> */}

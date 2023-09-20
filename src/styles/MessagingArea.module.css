@@ -53,6 +53,16 @@
     background-color: aliceblue;
 }
 
+.deleteHistoryCta {
+    width: 130px;
+    display: inline;
+    margin-left: auto;
+    background-color: #ff000073;
+    border-radius: 5px;
+    padding: 4px 0px;
+    font-size: 17px;
+}
+
 .inputContainer {
     width: 100%;
     display: flex;
